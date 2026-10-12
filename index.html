@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#3b3226" />
+  <title>Commander’s Dilemma — Prairie Grove (Confederate)</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1>Battle of Prairie Grove</h1>
+    <p>Commander’s Dilemma — Confederate Perspective</p>
+  </header>
+
+  <main class="container">
+    <section class="card" id="dilemmaCard" aria-live="polite">
+      <p class="screen-label">Interactive Scenario</p>
+      <h2 id="sceneTitle">Loading scenario…</h2>
+      <p class="introduction" id="sceneIntro">
+        December 7, 1862. Your corps holds the wooded ridge near Prairie Grove Church.
+        Cavalry screens in front; Herron is forming across the Illinois River; Blunt is somewhere to the west.
+        Each choice trades tempo, cohesion, and losses. There is no single “right” answer.
+      </p>
+
+      <div class="status-grid" role="group" aria-label="Current status">
+        <div class="stat"><div class="label">Tempo (Time)</div><div class="bar-wrap"><div id="timeBar" class="bar"></div></div><div id="timeVal" class="value dim">≈</div></div>
+        <div class="stat"><div class="label">Supply</div><div class="bar-wrap"><div id="supplyBar" class="bar"></div></div><div id="supplyVal" class="value dim">≈</div></div>
+        <div class="stat"><div class="label">Morale</div><div class="bar-wrap"><div id="moraleBar" class="bar"></div></div><div id="moraleVal" class="value dim">≈</div></div>
+        <div class="stat"><div class="label">Casualties</div><div class="bar-wrap"><div id="casualtyBar" class="bar danger"></div></div><div id="casualtyVal" class="value dim">≈</div></div>
+        <div class="stat"><div class="label">Cohesion</div><div class="bar-wrap"><div id="cohesionBar" class="bar neutral"></div></div><div id="cohesionVal" class="value dim">≈</div></div>
+        <div class="step-indicator">
+          <strong>Decision:</strong> <span id="stepVal">1</span> / <span id="stepMax">7</span>
+          <span id="phaseTag" class="badge posture">Phase: —</span>
+          <span id="routeTag" class="badge alt hidden" aria-live="polite"></span>
+        </div>
+      </div>
+
+      <section class="map-section" aria-label="Battlefield map">
+        <h3 class="map-title">Prairie Grove Battlefield Map</h3>
+        <figure class="battle-map">
+          <div class="map-canvas">
+            <img id="mapBase" class="map-base" alt="Historic map of the Prairie Grove battlefield" />
+            <svg id="mapOverlay" class="map-overlay" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+              <g id="confLines" class="lines-conf"></g>
+              <g id="unionLines" class="lines-union"></g>
+            </svg>
+          </div>
+          <figcaption class="map-caption">
+            Troop lines update each phase. Add a JPG to <code>assets/</code> and set
+            <code>DEFAULT_MAP_SRC</code> in <code>script.js</code> or use <code>?map=yourfile.jpg</code>.
+          </figcaption>
+        </figure>
+        <div class="map-legend">
+          <span class="legend-item"><span class="strip strip-conf"></span> Confederate line</span>
+          <span class="legend-item"><span class="strip strip-union"></span> Union line</span>
+        </div>
+      </section>
+
+      <div id="sceneBody" class="scene-body"></div>
+      <div id="choiceList" class="choice-list" role="group" aria-label="Choices"></div>
+
+      <div class="puzzle-actions">
+        <button class="primary-btn touch-btn" id="confirmBtn" type="button">Confirm Choice</button>
+        <button class="secondary-btn touch-btn" id="resetBtn" type="button">Restart Scenario</button>
+        <button class="secondary-btn touch-btn" id="shareBtn" type="button">Copy Shareable Link</button>
+        <a class="text-btn" href="../index.html">Back to Main Experience</a>
+      </div>
+
+      <div id="outcomeBox" class="outcome-box hidden">
+        <h3 id="outcomeTitle">Outcome</h3>
+        <p id="outcomeSummary"></p>
+        <div class="outcome-metrics">
+          <div><strong>Morale:</strong> <span id="finalMorale">—</span> (<span id="finalMoraleNum">—</span>)</div>
+          <div><strong>Supply (final):</strong> <span id="finalSupply">—</span></div>
+          <div><strong>Cohesion:</strong> <span id="finalCohesion">—</span> (<span id="finalCohesionNum">—</span>)</div>
+          <div><strong>Time Remaining:</strong> <span id="finalTime">—</span> hrs</div>
+          <div><strong>Confederate Casualties:</strong> <span id="finalCasualties">—</span></div>
+          <div><strong>Historic Choices taken:</strong> <span id="historicCount">—</span> / 7</div>
+          <div><strong>Battle Phases:</strong> <span id="finalPhases">—</span></div>
+          <div><strong>Decision Path:</strong> <span id="finalPath">—</span></div>
+        </div>
+      </div>
+
+      <details class="notes">
+        <summary>Reference notes</summary>
+        <ul>
+          <li>Troop positions follow the American Battlefield Trust Prairie Grove map.</li>
+          <li>Late-day ammunition shortage and withdrawal are reflected in supply/morale behavior.</li>
+          <li>Casualty range aligns with reported Confederate losses in summaries.</li>
+        </ul>
+      </details>
+    </section>
+  </main>
+  <footer>Prairie Grove Battlefield Interactive Experience</footer>
+  <script src="script.js"></script>
+</body>
+</html>
