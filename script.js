@@ -63,6 +63,8 @@ const finalCasualties= document.getElementById("finalCasualties");
 const finalPhases    = document.getElementById("finalPhases");
 const finalPath      = document.getElementById("finalPath");
 const historicCount  = document.getElementById("historicCount");
+const historicNote = document.getElementById("historicNote");
+const historicNoteText = document.getElementById("historicNoteText");
 
 /* Map elements */
 const mapBase       = document.getElementById("mapBase");
@@ -148,7 +150,7 @@ function updateBars() {
 }
 function setPhase(label) {
   phaseTag.textContent = `Phase: ${label}`;
-  state.phases.push(label);
+  if (state.phases.length===0 || state.phases[state.phases.length-1]!==label){ state.phases.push(label);}
 }
 
 /* ---------- Historic choice mapping ---------- */
@@ -295,7 +297,7 @@ function computeOutcome(s) {
 
 /* Reveal numbers only in Outcome */
 function showOutcome() {
-  state.supply = clamp(state.supply, 0, 5); // enforce low/gone by Decision 7
+  state.supply = Math.min(state.supply, 25); // enforce low/gone by Decision 7
   updateBars();
   confirmBtn.disabled = true;
 
@@ -503,7 +505,7 @@ function applyChoice(choiceId) {
   state.path.push(choiceId);
   const nextId = node.next;
   if (nextId === "END") {
-    state.supply = clamp(state.supply, 0, 5); // force low/gone by Decision 7
+    state.supply = Math.min(state.supply, 25); // force low/gone by Decision 7
     showOutcome();
   } else {
     state.step++;
